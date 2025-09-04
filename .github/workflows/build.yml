@@ -56,6 +56,10 @@ jobs:
           - runner: ubuntu-latest
             target: x86_64-unknown-linux-gnu
             file: linux-amd64
+          - runner: ubuntu-latest
+            target: x86_64-unknown-linux-musl
+            file: linux-amd64-musl
+            tool: musl-tools clang llvm
           # TODO: ohos is not ready
           # - runner: ubuntu-latest
           #   target: aarch64-unknown-linux-ohos
@@ -69,14 +73,37 @@ jobs:
             file: linux-arm64-musl
             tool: musl-tools clang llvm gcc-multilib
           - runner: ubuntu-latest
+            target: armv7-unknown-linux-gnueabihf
+            file: linux-armv7
+            tool: gcc-arm-linux-gnueabihf binutils-arm-linux-gnueabihf
+          - runner: ubuntu-latest
+            target: armv7-unknown-linux-musleabihf
+            file: linux-armv7-musl
+            tool: musl-tools clang llvm gcc-multilib
+          - runner: ubuntu-latest
             target: i686-unknown-linux-gnu
             file: linux-386
             tool: gcc-multilib
+          - runner: ubuntu-latest
+            target: i686-unknown-linux-musl
+            file: linux-386-musl
+            tool: musl-tools clang llvm gcc-multilib
     env:
       CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER: aarch64-linux-gnu-gcc
+      CARGO_TARGET_ARMV7_UNKNOWN_LINUX_GNUEABIHF_LINKER: arm-linux-gnueabihf-gcc
+      # musl targets configuration
+      CC_x86_64_unknown_linux_musl: clang
+      AR_x86_64_unknown_linux_musl: llvm-ar
+      CARGO_TARGET_X86_64_UNKNOWN_LINUX_MUSL_RUSTFLAGS: "-Clink-self-contained=yes -Clinker=rust-lld"
       CC_aarch64_unknown_linux_musl: clang
       AR_aarch64_unknown_linux_musl: llvm-ar
       CARGO_TARGET_AARCH64_UNKNOWN_LINUX_MUSL_RUSTFLAGS: "-Clink-self-contained=yes -Clinker=rust-lld"
+      CC_armv7_unknown_linux_musleabihf: clang
+      AR_armv7_unknown_linux_musleabihf: llvm-ar
+      CARGO_TARGET_ARMV7_UNKNOWN_LINUX_MUSLEABIHF_RUSTFLAGS: "-Clink-self-contained=yes -Clinker=rust-lld"
+      CC_i686_unknown_linux_musl: clang
+      AR_i686_unknown_linux_musl: llvm-ar
+      CARGO_TARGET_I686_UNKNOWN_LINUX_MUSL_RUSTFLAGS: "-Clink-self-contained=yes -Clinker=rust-lld"
     steps:
       - uses: actions/checkout@v4
       - name: Print env
