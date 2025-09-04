@@ -43,6 +43,10 @@ build-windows:
 
 build-linux:
 	make build-arch TARGET=x86_64-unknown-linux-gnu FILE=linux-amd64
+	make build-arch TARGET=x86_64-unknown-linux-musl FILE=linux-amd64-musl
 	make build-arch TARGET=aarch64-unknown-linux-gnu FILE=linux-arm64
 	make build-arch TARGET=aarch64-unknown-linux-musl FILE=linux-arm64-musl
+	make build-arch TARGET=armv7-unknown-linux-gnueabihf FILE=linux-armv7
+	make build-arch TARGET=armv7-unknown-linux-musleabihf FILE=linux-armv7-musl
 	make build-arch TARGET=i686-unknown-linux-gnu FILE=linux-386
+	make build-arch TARGET=i686-unknown-linux-musl FILE=linux-386-musl

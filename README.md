@@ -12,7 +12,7 @@
 - 友好的 UI 交互
 - 针对低速网络(< 2.5G)优化测速资源占用
 
-[v1 进度追踪看板](https://github.com/XGHeaven/homebox/projects/1)
+[v1 进度追踪看板](https://github.com/MilesPoupart/homebox/projects/1)
 
 ![dark-theme](./doc/dark-theme.png)
 
@@ -31,15 +31,15 @@
 首先你需要有一台服务器，只要能支持安装 Docker 即可，比如群辉、FreeNas、unRaid、CentOS 等等，暂时只支持 x86 服务器。
 
 ```bash
-docker run -d -p 3300:3300 --name homebox xgheaven/homebox
+docker run -d -p 3300:3300 --name homebox milespoupart/homebox
 ```
 
-安装并启动 `xgheaven/homebox` 镜像，默认情况下暴露的端口是 `3300`。
+安装并启动 `milespoupart/homebox` 镜像，默认情况下暴露的端口是 `3300`。
 然后在浏览器中输入 `http://your.server.ip:3300` 即可。
 
 ### Binary
 
-直接在 [Release](https://github.com/XGHeaven/homebox/releases) 下载对应版本即可。
+直接在 [Release](https://github.com/MilesPoupart/homebox/releases) 下载对应版本即可。
 
 解压之后直接执行 serve 命令即可启动服务，参数如下
 

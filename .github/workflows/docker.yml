@@ -1,7 +1,7 @@
 name: Docker
 
 env:
-  REGISTRY_IMAGE: xgheaven/homebox
+  REGISTRY_IMAGE: milespoupart/homebox
 
 on:
   push:
