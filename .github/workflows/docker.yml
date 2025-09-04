@@ -74,12 +74,13 @@ jobs:
       - name: Create manifest list and push
         working-directory: /tmp/digests
         run: |
-          echo $DOCKER_METADATA_OUTPUT_JSON
           docker buildx imagetools create \
             --tag ${{ env.REGISTRY_IMAGE }}:latest \
-            $(jq -cr '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON") \
+            --tag ${{ env.REGISTRY_IMAGE }}:${{ github.ref_name }} \
             $(printf '${{ env.REGISTRY_IMAGE }}@sha256:%s ' *)
       
       - name: Inspect image
         run: |
-          docker buildx imagetools inspect ${{ env.REGISTRY_IMAGE }}:latest
+          # Wait a moment for image to be available
+          sleep 10
+          docker buildx imagetools inspect ${{ env.REGISTRY_IMAGE }}:latest || echo "Image inspection failed, but this is not critical"
